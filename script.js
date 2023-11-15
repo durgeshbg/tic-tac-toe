@@ -13,6 +13,8 @@ const TicTacToe = (function () {
             displayStr += '\n' + '-'.repeat(10) + '\n';
         }
     };
-    return {displayBoard};
+    const Player = function (name, marker) {
+        return { name, marker };
+    };
+    return { Player, displayBoard };
 })();
-
