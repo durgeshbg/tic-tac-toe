@@ -16,5 +16,8 @@ const TicTacToe = (function () {
     const Player = function (name, marker) {
         return { name, marker };
     };
-    return { Player, displayBoard };
+    const makeMove = function (Player, position) {
+        BOARD[position[0]][position[1]] = Player.marker;
+    };
+    return { Player, displayBoard, makeMove };
 })();
