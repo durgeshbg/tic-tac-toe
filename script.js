@@ -132,9 +132,20 @@ const DOMLogic = (function () {
         render(TicTacToe.getBoard());
     };
 
+    const renderPlayers = function (players) {
+        const player1name = document.querySelector('.player1 .name');
+        const player2name = document.querySelector('.player2 .name');
+        const player1marker = document.querySelector('.player1 .marker');
+        const player2marker = document.querySelector('.player2 .marker');
+        player1name.textContent = players[0].name;
+        player2name.textContent = players[1].name;
+        player1marker.textContent = players[0].marker;
+        player2marker.textContent = players[1].marker;
+    };
 
-    return { renderBoard };
+    return { renderBoard, renderPlayers };
 })();
 TicTacToe.playerCreate('MAN', 'X');
 TicTacToe.playerCreate('BOT', 'O');
 DOMLogic.renderBoard(TicTacToe.getBoard());
+DOMLogic.renderPlayers(TicTacToe.players);
