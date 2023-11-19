@@ -128,8 +128,11 @@ const DOMLogic = (function () {
 
     const makeMove = function (e) {
         let pos = e.target.classList[1].split('-');
-        TicTacToe.makeMove(TicTacToe.players[TicTacToe.getTurn()], pos);
-        render(TicTacToe.getBoard());
+        let turn = TicTacToe.getTurn();
+        let player = TicTacToe.players[turn];
+        let getBoard = TicTacToe.getBoard;
+        TicTacToe.makeMove(player, pos);
+        renderBoard(getBoard());
     };
 
     const renderPlayers = function (players) {
