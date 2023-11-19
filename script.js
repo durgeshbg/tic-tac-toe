@@ -4,8 +4,8 @@ const TicTacToe = (function () {
         [' ', ' ', ' '],
         [' ', ' ', ' '],
     ];
-
     const players = [];
+    let turn = 1;
 
     // Player object
     const Player = function (name, marker) {
@@ -73,10 +73,18 @@ const TicTacToe = (function () {
         else return -1;
     };
 
-    return { displayBoard, makeMove, gameStatus, players, playerCreate };
-})();
+    // function: get players turn
+    const getTurn = () => {
+        turn = turn == 1 ? 0 : 1;
+        return turn;
+    };
 
-TicTacToe.playerCreate('Durgesh', 'X');
-TicTacToe.playerCreate('Babu', 'O');
-TicTacToe.playerCreate('Babu', 'O');
-console.log(TicTacToe.players);
+    return {
+        displayBoard,
+        makeMove,
+        gameStatus,
+        players,
+        playerCreate,
+        getTurn,
+    };
+})();
