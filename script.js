@@ -34,13 +34,25 @@ const TicTacToe = (function () {
             for (let j = 0; j < 3; j++) duplicate[i][j] = BOARD[j][i];
         return duplicate;
     };
+    
+    const checkDiagonals = function (Player) {
+        let d1 = 0,
+            d2 = 0;
+        for (let i = 0; i < 3; i++) {
+            d1 = BOARD[i][i] == Player.marker ? d1 + 1 : d1;
+            d2 = BOARD[i][2 - i] == Player.marker ? d2 + 1 : d2;
+        }
+
+        return d1 == 3 ? true : d2 == 3 ? true : false;
+    };
 
     const gameStatus = function (Player) {
         const rowStatus = checkRows(BOARD, Player);
         const colStatus = checkRows(transposeBoard(), Player);
+        const diagonalStatus = checkDiagonals(Player);
         const tie = BOARD.every((i) => i.every((j) => j != ' '));
-        if (rowStatus) return 1;
-        else if (colStatus) return 1;
+
+        if (rowStatus || colStatus || diagonalStatus) return 1;
         else if (tie) return 0;
         else return -1;
     };
@@ -56,12 +68,12 @@ TicTacToe.makeMove(P2, [0, 1]);
 TicTacToe.makeMove(P2, [0, 2]);
 
 TicTacToe.makeMove(P1, [1, 0]);
-TicTacToe.makeMove(P1, [1, 1]);
+TicTacToe.makeMove(P2, [1, 1]);
 TicTacToe.makeMove(P2, [1, 2]);
 
-TicTacToe.makeMove(P1, [2, 0]);
+TicTacToe.makeMove(P2, [2, 0]);
 TicTacToe.makeMove(P1, [2, 1]);
-TicTacToe.makeMove(P2, [2, 2]);
+TicTacToe.makeMove(P1, [2, 2]);
 
 console.log(TicTacToe.displayBoard());
-console.log(TicTacToe.gameStatus(P1));
+console.log(TicTacToe.gameStatus(P2));
