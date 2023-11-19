@@ -5,7 +5,7 @@ const TicTacToe = (function () {
         [' ', ' ', ' '],
     ];
     const players = [];
-    let turn = 1;
+    let turn = 0;
 
     // Player object
     const Player = function (name, marker) {
@@ -64,8 +64,9 @@ const TicTacToe = (function () {
 
     // function: get players turn
     const getTurn = () => {
+        let temp = turn;
         turn = turn == 1 ? 0 : 1;
-        return turn;
+        return temp;
     };
 
     return {
@@ -106,12 +107,14 @@ const TicTacToe = (function () {
 const DOMLogic = (function () {
     const render = function (gameboard) {
         const board = document.querySelector('.board');
+        board.innerHTML = '';
         for (let i = 0; i < 3; i++) {
             const row = document.createElement('div');
             for (let j = 0; j < 3; j++) {
                 const item = document.createElement('div');
                 item.textContent = gameboard[i][j];
-                item.classList.add('item');
+                item.classList.add(`item`, `${i}-${j}`);
+                item.addEventListener('click', makeMove);
                 row.appendChild(item);
             }
             row.classList.add('row');
@@ -119,12 +122,14 @@ const DOMLogic = (function () {
         }
     };
 
+    const makeMove = function (e) {
+        let pos = e.target.classList[1].split('-');
+        TicTacToe.makeMove(TicTacToe.players[TicTacToe.getTurn()], pos);
+        render(TicTacToe.getBoard());
+    };
+
     return { render };
 })();
-
-let gameboard = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-];
-DOMLogic.render(gameboard);
+TicTacToe.playerCreate('MAN', 'X');
+TicTacToe.playerCreate('BOT', 'O');
+DOMLogic.render(TicTacToe.getBoard());
