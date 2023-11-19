@@ -1,10 +1,14 @@
+const Player = function (name, marker) {
+    return { name, marker };
+};
+
 const TicTacToe = (function () {
     const BOARD = [
-        ['X', 'O', 'X'],
-        ['X', 'X', 'O'],
-        ['O', 'O', 'X'],
+        [' ', ' ', ' '],
+        [' ', ' ', ' '],
+        [' ', ' ', ' '],
     ];
-    const displayBoard = (function () {
+    const displayBoard = function () {
         let displayStr = '';
         for (let i = 0; i < BOARD.length; i++) {
             row = BOARD[i];
@@ -12,12 +16,15 @@ const TicTacToe = (function () {
             if (i == 2) return displayStr;
             displayStr += '\n' + '-'.repeat(10) + '\n';
         }
-    })();
-    const Player = function (name, marker) {
-        return { name, marker };
     };
     const makeMove = function (Player, position) {
         BOARD[position[0]][position[1]] = Player.marker;
     };
-    return { Player, displayBoard, makeMove };
+    return { displayBoard, makeMove };
 })();
+
+const P1 = Player('Durgesh', 'X');
+const P2 = Player('Babu', 'O');
+console.log(TicTacToe.displayBoard());
+TicTacToe.makeMove(P1, [1, 2]);
+console.log(TicTacToe.displayBoard());
