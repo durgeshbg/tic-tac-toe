@@ -28,6 +28,13 @@ const TicTacToe = (function () {
         return board.some((i) => i.every((j) => j == Player.marker));
     };
 
+    const transposeBoard = function () {
+        duplicate = JSON.parse(JSON.stringify(BOARD));
+        for (let i = 0; i < 3; i++)
+            for (let j = 0; j < 3; j++) duplicate[i][j] = BOARD[j][i];
+        return duplicate;
+    };
+
     const gameStatus = function (Player) {
         const rowStatus = checkRows(BOARD, Player);
         const tie = BOARD.every((i) => i.every((j) => j != ' '));
