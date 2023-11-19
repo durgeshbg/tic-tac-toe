@@ -21,18 +21,45 @@ h1 {
     align-self: center;
 }
 
+.player1,
+.player2 {
+    font-size: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.player1 {
+    grid-area: 2 / 1 / 3 / 2;
+}
+.player2 {
+    grid-area: 2 / 3 / 3 / 4;
+}
+.name {
+    letter-spacing: 5px;
+}
+.marker {
+    font-weight: bold;
+    font-size: 100px;
+    border: 5px solid black;
+    border-radius: 5px;
+    width: 120px;
+    text-align: center;
+    padding: auto;
+}
+
 .board {
     grid-area: 2 / 2 / 3 / 3;
     justify-self: center;
     align-self: center;
 }
-
 .row {
     display: flex;
 }
-
 .item {
-    border-radius: 5px;
+    border-radius: 10px;
     border: 5px solid black;
     width: 200px;
     height: 200px;
