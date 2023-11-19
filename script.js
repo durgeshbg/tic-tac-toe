@@ -12,11 +12,8 @@ const TicTacToe = (function () {
         return { name, marker };
     };
     // function: add players in game
+    // 0: cannot add more players | 1: player created | -1: marker already taken
     const playerCreate = function (name, marker) {
-        if (players.length >= 2) {
-            console.log('Cannot add for than two players!');
-            return;
-        }
         players.push(Player(name, marker));
     };
 
@@ -88,3 +85,30 @@ const TicTacToe = (function () {
         getTurn,
     };
 })();
+
+const GameLogic = function () {
+    const players = TicTacToe.players;
+
+    const turn = TicTacToe.getTurn;
+    const gameStatus = TicTacToe.gameStatus;
+    const makeMove = TicTacToe.makeMove;
+    const display = TicTacToe.displayBoard;
+
+    TicTacToe.playerCreate('MAN', 'X');
+    TicTacToe.playerCreate('BOT', 'O');
+    while (true) {
+        console.log(display());
+        let pos = JSON.parse(prompt('Enter position vector: '));
+        let player = players[turn()];
+        makeMove(player, pos);
+        if (gameStatus(player) == 1) {
+            console.log(`${player.name} wins!`);
+            break;
+        } else if (gameStatus(player) == 0) {
+            console.log("It's a tie!");
+            break;
+        }
+    }
+};
+
+GameLogic();
