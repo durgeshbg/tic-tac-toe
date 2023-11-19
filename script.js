@@ -4,7 +4,7 @@ const TicTacToe = (function () {
         ['X', 'X', 'O'],
         ['O', 'O', 'X'],
     ];
-    const displayBoard = function () {
+    const displayBoard = (function () {
         let displayStr = '';
         for (let i = 0; i < BOARD.length; i++) {
             row = BOARD[i];
@@ -12,7 +12,7 @@ const TicTacToe = (function () {
             if (i == 2) return displayStr;
             displayStr += '\n' + '-'.repeat(10) + '\n';
         }
-    };
+    })();
     const Player = function (name, marker) {
         return { name, marker };
     };
