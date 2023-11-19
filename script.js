@@ -17,8 +17,9 @@ const TicTacToe = (function () {
             displayStr += '\n' + '-'.repeat(10) + '\n';
         }
     };
-    const makeMove = function (Player, position) {
-        BOARD[position[0]][position[1]] = Player.marker;
+    const makeMove = function (Player, pos) {
+        if (BOARD[pos[0]][pos[1]] == ' ') BOARD[pos[0]][pos[1]] = Player.marker;
+        else console.log(`Already occupied by ${BOARD[pos[0]][pos[1]]}`);
     };
     return { displayBoard, makeMove };
 })();
@@ -27,4 +28,6 @@ const P1 = Player('Durgesh', 'X');
 const P2 = Player('Babu', 'O');
 console.log(TicTacToe.displayBoard());
 TicTacToe.makeMove(P1, [1, 2]);
+console.log(TicTacToe.displayBoard());
+TicTacToe.makeMove(P2, [1, 2]);
 console.log(TicTacToe.displayBoard());
