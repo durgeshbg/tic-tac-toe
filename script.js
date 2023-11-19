@@ -37,8 +37,10 @@ const TicTacToe = (function () {
 
     const gameStatus = function (Player) {
         const rowStatus = checkRows(BOARD, Player);
+        const colStatus = checkRows(transposeBoard(), Player);
         const tie = BOARD.every((i) => i.every((j) => j != ' '));
         if (rowStatus) return 1;
+        else if (colStatus) return 1;
         else if (tie) return 0;
         else return -1;
     };
