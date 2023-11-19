@@ -23,7 +23,11 @@ const TicTacToe = (function () {
     // function: make move by a specified Player in position vector
     const makeMove = function (Player, pos) {
         if (BOARD[pos[0]][pos[1]] == ' ') BOARD[pos[0]][pos[1]] = Player.marker;
-        else console.log(`Already occupied by ${BOARD[pos[0]][pos[1]]}`);
+        else {
+            document.querySelector(
+                '.message'
+            ).textContent = `Already occupied by ${BOARD[pos[0]][pos[1]]}`;
+        }
     };
 
     // function: checks if rows match in board for Player
@@ -105,7 +109,7 @@ const TicTacToe = (function () {
 // };
 
 const DOMLogic = (function () {
-    const render = function (gameboard) {
+    const renderBoard = function (gameboard) {
         const board = document.querySelector('.board');
         board.innerHTML = '';
         for (let i = 0; i < 3; i++) {
@@ -128,8 +132,9 @@ const DOMLogic = (function () {
         render(TicTacToe.getBoard());
     };
 
-    return { render };
+
+    return { renderBoard };
 })();
 TicTacToe.playerCreate('MAN', 'X');
 TicTacToe.playerCreate('BOT', 'O');
-DOMLogic.render(TicTacToe.getBoard());
+DOMLogic.renderBoard(TicTacToe.getBoard());
