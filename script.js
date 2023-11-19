@@ -18,15 +18,7 @@ const TicTacToe = (function () {
     };
 
     // function: display board state
-    const displayBoard = function () {
-        let displayStr = '';
-        for (let i = 0; i < BOARD.length; i++) {
-            row = BOARD[i];
-            displayStr += row[0] + ' | ' + row[1] + ' | ' + row[2];
-            if (i == 2) return displayStr;
-            displayStr += '\n' + '-'.repeat(10) + '\n';
-        }
-    };
+    const getBoard = () => BOARD;
 
     // function: make move by a specified Player in position vector
     const makeMove = function (Player, pos) {
@@ -77,7 +69,7 @@ const TicTacToe = (function () {
     };
 
     return {
-        displayBoard,
+        getBoard,
         makeMove,
         gameStatus,
         players,
@@ -86,29 +78,53 @@ const TicTacToe = (function () {
     };
 })();
 
-const GameLogic = function () {
-    const players = TicTacToe.players;
+// const GameLogic = function () {
+//     const players = TicTacToe.players;
 
-    const turn = TicTacToe.getTurn;
-    const gameStatus = TicTacToe.gameStatus;
-    const makeMove = TicTacToe.makeMove;
-    const display = TicTacToe.displayBoard;
+//     const turn = TicTacToe.getTurn;
+//     const gameStatus = TicTacToe.gameStatus;
+//     const makeMove = TicTacToe.makeMove;
+//     const display = TicTacToe.displayBoard;
 
-    TicTacToe.playerCreate('MAN', 'X');
-    TicTacToe.playerCreate('BOT', 'O');
-    while (true) {
-        console.log(display());
-        let pos = JSON.parse(prompt('Enter position vector: '));
-        let player = players[turn()];
-        makeMove(player, pos);
-        if (gameStatus(player) == 1) {
-            console.log(`${player.name} wins!`);
-            break;
-        } else if (gameStatus(player) == 0) {
-            console.log("It's a tie!");
-            break;
+//     TicTacToe.playerCreate('MAN', 'X');
+//     TicTacToe.playerCreate('BOT', 'O');
+//     while (true) {
+//         console.log(display());
+//         let pos = JSON.parse(prompt('Enter position vector: '));
+//         let player = players[turn()];
+//         makeMove(player, pos);
+//         if (gameStatus(player) == 1) {
+//             console.log(`${player.name} wins!`);
+//             break;
+//         } else if (gameStatus(player) == 0) {
+//             console.log("It's a tie!");
+//             break;
+//         }
+//     }
+// };
+
+const DOMLogic = (function () {
+    const render = function (gameboard) {
+        const board = document.querySelector('.board');
+        for (let i = 0; i < 3; i++) {
+            const row = document.createElement('div');
+            for (let j = 0; j < 3; j++) {
+                const item = document.createElement('div');
+                item.textContent = gameboard[i][j];
+                item.classList.add('item');
+                row.appendChild(item);
+            }
+            row.classList.add('row');
+            board.appendChild(row);
         }
-    }
-};
+    };
 
-GameLogic();
+    return { render };
+})();
+
+let gameboard = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+];
+DOMLogic.render(gameboard);
