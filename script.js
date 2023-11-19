@@ -146,9 +146,15 @@ const DOMLogic = (function () {
         player2marker.textContent = players[1].marker;
     };
 
-    return { renderBoard, renderPlayers };
+    const render = function () {
+        const players = TicTacToe.players;
+        const getBoard = TicTacToe.getBoard;
+        renderBoard(getBoard());
+        renderPlayers(players);
+    };
+
+    return { render };
 })();
 TicTacToe.playerCreate('MAN', 'X');
 TicTacToe.playerCreate('BOT', 'O');
-DOMLogic.renderBoard(TicTacToe.getBoard());
-DOMLogic.renderPlayers(TicTacToe.players);
+DOMLogic.render();
