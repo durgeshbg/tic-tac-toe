@@ -21,8 +21,11 @@ const TicTacToe = (function () {
 
     // function: make move by a specified Player in position vector
     const makeMove = function (pos) {
-        if (BOARD[pos[0]][pos[1]] == ' ') BOARD[pos[0]][pos[1]] = players[turn];
-        else return -1;
+        if (gameStatus() != -1) return 0;
+        if (BOARD[pos[0]][pos[1]] == ' ') {
+            BOARD[pos[0]][pos[1]] = players[turn];
+            return 1;
+        } else return -1;
     };
 
     // function: checks if rows match in board for Player
