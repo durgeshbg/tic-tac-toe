@@ -19,6 +19,12 @@ const TicTacToe = (function () {
     // function: display board state
     const getBoard = () => BOARD;
 
+    // function: reset board
+    const resetBoard = () => {
+        for (let i = 0; i < 3; i++)
+            for (let j = 0; j < 3; j++) BOARD[i][j] = ' ';
+    };
+
     // function: make move by a specified Player in position vector
     // 1: successful move | 0: gameover | -1: not possible
     const makeMove = function (pos) {
@@ -82,6 +88,7 @@ const TicTacToe = (function () {
         playerCreate,
         getTurn,
         flipTurn,
+        resetBoard,
     };
 })();
 
@@ -135,6 +142,12 @@ const DOMLogic = (function () {
 
     return { render };
 })();
+
+document.querySelector('.reset button').addEventListener('click', () => {
+    TicTacToe.resetBoard();
+    DOMLogic.render();
+});
+
 TicTacToe.playerCreate('MAN', 'X');
 TicTacToe.playerCreate('BOT', 'O');
 DOMLogic.render();
