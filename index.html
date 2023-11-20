@@ -13,12 +13,18 @@
         <div class="message"></div>
         <dialog>
             <form method="dialog">
-                <label for="player1-name">Player 1: </label>
-                <input type="text" id="player1-name" required />
-                <button disabled>X</button>
-                <label for="player1-name">Player 2: </label>
-                <input type="text" id="player1-name" required />
-                <button disabled>O</button>
+                <div class="form-row">
+                    <label for="player1-name">Player 1: </label>
+                    <input type="text" id="player1-name" required />
+                    <span></span>
+                    <button disabled>X</button>
+                </div>
+                <div class="form-row">
+                    <label for="player1-name">Player 2: </label>
+                    <input type="text" id="player1-name" required />
+                    <span></span>
+                    <button disabled>O</button>
+                </div>
                 <button type="submit">Play</button>
             </form>
         </dialog>
