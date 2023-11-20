@@ -118,7 +118,12 @@ const DOMLogic = (function () {
         const message = document.querySelector('.message');
         if (flag == 1) message.textContent = '';
         else if (flag == -1) message.textContent = 'Already occupied!';
-        else if (flag == 0) message.textContent = `Game Over`;
+        else if (flag == 0) {
+            let status = TicTacToe.gameStatus();
+            let player = TicTacToe.players[TicTacToe.getTurn()];
+            if (status == 0) message.textContent = "It's a tie!";
+            else if (status == 1) message.textContent = `${player.name} won!`;
+        }
     };
 
     const render = function () {
