@@ -123,22 +123,20 @@ const DOMLogic = (function () {
         renderBoard(getBoard());
     };
 
-    const renderPlayers = function (players) {
-        const player1name = document.querySelector('.player1 .name');
-        const player2name = document.querySelector('.player2 .name');
-        const player1marker = document.querySelector('.player1 .marker');
-        const player2marker = document.querySelector('.player2 .marker');
-        player1name.textContent = players[0].name;
-        player2name.textContent = players[1].name;
-        player1marker.textContent = players[0].marker;
-        player2marker.textContent = players[1].marker;
+    const renderPlayers = function () {
+        const players = TicTacToe.players;
+        const names = [...document.querySelectorAll('.name')];
+        const markers = [...document.querySelectorAll('.marker')];
+        for (let i = 0; i < 2; i++) {
+            names[i].textContent = players[i].name;
+            markers[i].textContent = players[i].marker;
+        }
     };
 
     const render = function () {
-        const players = TicTacToe.players;
         const getBoard = TicTacToe.getBoard;
         renderBoard(getBoard());
-        renderPlayers(players);
+        renderPlayers();
     };
 
     return { render };
