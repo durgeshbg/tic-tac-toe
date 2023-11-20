@@ -29,6 +29,7 @@ h1 {
     justify-self: center;
     align-self: center;
     font-size: 50px;
+    height: 60px;
     font-style: italic;
 }
 
