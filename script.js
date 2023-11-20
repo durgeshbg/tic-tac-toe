@@ -144,7 +144,6 @@ const DOMLogic = (function () {
 })();
 
 document.querySelector('form').addEventListener('submit', (e) => {
-    console.log(e.target);
     playerName = [e.target[0].value, e.target[1].value];
     TicTacToe.playerCreate(playerName[0], 'X');
     TicTacToe.playerCreate(playerName[1], 'O');
