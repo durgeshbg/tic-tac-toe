@@ -26,8 +26,8 @@ const TicTacToe = (function () {
     };
 
     // function: checks if rows match in board for Player
-    const checkRows = function (board, Player) {
-        return board.some((i) => i.every((j) => j == Player.marker));
+    const checkRows = function () {
+        return BOARD.some((i) => i.every((j) => j == players[turn].marker));
     };
 
     // function: transpose rows and cols of copied BOARD
@@ -39,24 +39,22 @@ const TicTacToe = (function () {
     };
 
     // function: checks both diagonals match
-    const checkDiagonals = function (Player) {
+    const checkDiagonals = function () {
         let d1 = 0,
             d2 = 0;
         for (let i = 0; i < 3; i++) {
-            d1 = BOARD[i][i] == Player.marker ? d1 + 1 : d1;
-            d2 = BOARD[i][2 - i] == Player.marker ? d2 + 1 : d2;
+            d1 = BOARD[i][i] == players[turn].marker ? d1 + 1 : d1;
+            d2 = BOARD[i][2 - i] == players[turn].marker ? d2 + 1 : d2;
         }
         return d1 == 3 ? true : d2 == 3 ? true : false;
     };
 
     // function: game state of Player (0: tie, 1: win, -1:continue)
-    const gameStatus = function (Player) {
-        const rowStatus = checkRows(BOARD, Player);
-        const colStatus = checkRows(transposeBoard(), Player);
-        const diagonalStatus = checkDiagonals(Player);
+    const gameStatus = function () {
         const tie = BOARD.every((i) => i.every((j) => j != ' '));
 
-        if (rowStatus || colStatus || diagonalStatus) return 1;
+        if (checkRows() || checkRows(transposeBoard()) || checkDiagonals())
+            return 1;
         else if (tie) return 0;
         else return -1;
     };
