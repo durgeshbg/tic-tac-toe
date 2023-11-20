@@ -20,13 +20,9 @@ const TicTacToe = (function () {
     const getBoard = () => BOARD;
 
     // function: make move by a specified Player in position vector
-    const makeMove = function (Player, pos) {
-        if (BOARD[pos[0]][pos[1]] == ' ') BOARD[pos[0]][pos[1]] = Player.marker;
-        else {
-            document.querySelector(
-                '.message'
-            ).textContent = `Already occupied by ${BOARD[pos[0]][pos[1]]}`;
-        }
+    const makeMove = function (pos) {
+        if (BOARD[pos[0]][pos[1]] == ' ') BOARD[pos[0]][pos[1]] = players[turn];
+        else return -1;
     };
 
     // function: checks if rows match in board for Player
