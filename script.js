@@ -95,7 +95,8 @@ const DOMLogic = (function () {
     const makeMove = function (e) {
         let pos = e.target.classList[1].split('-');
         let getBoard = TicTacToe.getBoard;
-        TicTacToe.makeMove(pos);
+        let flag = TicTacToe.makeMove(pos);
+        renderMessage(flag);
         renderBoard(getBoard());
     };
 
@@ -107,6 +108,13 @@ const DOMLogic = (function () {
             names[i].textContent = players[i].name;
             markers[i].textContent = players[i].marker;
         }
+    };
+
+    const renderMessage = function (flag) {
+        const message = document.querySelector('.message');
+        if (flag == 1) message.textContent = '';
+        else if (flag == -1) message.textContent = 'Already occupied!';
+        else if (flag == 0) message.textContent = `Game Over`;
     };
 
     const render = function () {
