@@ -1,6 +1,6 @@
 const TicTacToe = (function () {
     const BOARD = [
-        ['', ' ', ' '],
+        [' ', ' ', ' '],
         [' ', ' ', ' '],
         [' ', ' ', ' '],
     ];
@@ -20,10 +20,12 @@ const TicTacToe = (function () {
     const getBoard = () => BOARD;
 
     // function: make move by a specified Player in position vector
+    // 1: successful move | 0: gameover | -1: not possible
     const makeMove = function (pos) {
         if (gameStatus() != -1) return 0;
         if (BOARD[pos[0]][pos[1]] == ' ') {
-            BOARD[pos[0]][pos[1]] = players[turn];
+            BOARD[pos[0]][pos[1]] = players[turn].marker;
+            flipTurn();
             return 1;
         } else return -1;
     };
@@ -78,31 +80,6 @@ const TicTacToe = (function () {
     };
 })();
 
-// const GameLogic = function () {
-//     const players = TicTacToe.players;
-
-//     const turn = TicTacToe.getTurn;
-//     const gameStatus = TicTacToe.gameStatus;
-//     const makeMove = TicTacToe.makeMove;
-//     const display = TicTacToe.displayBoard;
-
-//     TicTacToe.playerCreate('MAN', 'X');
-//     TicTacToe.playerCreate('BOT', 'O');
-//     while (true) {
-//         console.log(display());
-//         let pos = JSON.parse(prompt('Enter position vector: '));
-//         let player = players[turn()];
-//         makeMove(player, pos);
-//         if (gameStatus(player) == 1) {
-//             console.log(`${player.name} wins!`);
-//             break;
-//         } else if (gameStatus(player) == 0) {
-//             console.log("It's a tie!");
-//             break;
-//         }
-//     }
-// };
-
 const DOMLogic = (function () {
     const renderBoard = function (gameboard) {
         const items = [...document.querySelectorAll('.board .item')];
@@ -110,16 +87,15 @@ const DOMLogic = (function () {
         for (let i = 0; i < 3; i++)
             for (let j = 0; j < 3; j++) {
                 items[itemIndex].textContent = gameboard[i][j];
+                items[itemIndex].addEventListener('click', makeMove);
                 itemIndex++;
             }
     };
 
     const makeMove = function (e) {
         let pos = e.target.classList[1].split('-');
-        let turn = TicTacToe.getTurn();
-        let player = TicTacToe.players[turn];
         let getBoard = TicTacToe.getBoard;
-        TicTacToe.makeMove(player, pos);
+        TicTacToe.makeMove(pos);
         renderBoard(getBoard());
     };
 
