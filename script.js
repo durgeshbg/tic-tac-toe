@@ -22,17 +22,17 @@ const TicTacToe = (function () {
     // function: make move by a specified Player in position vector
     // 1: successful move | 0: gameover | -1: not possible
     const makeMove = function (pos) {
-        if (gameStatus() != -1) return 0;
         if (BOARD[pos[0]][pos[1]] == ' ') {
             BOARD[pos[0]][pos[1]] = players[turn].marker;
+            if (gameStatus() != -1) return 0;
             flipTurn();
             return 1;
         } else return -1;
     };
 
     // function: checks if rows match in board for Player
-    const checkRows = function () {
-        return BOARD.some((i) => i.every((j) => j == players[turn].marker));
+    const checkRows = function (board) {
+        return board.some((i) => i.every((j) => j == players[turn].marker));
     };
 
     // function: transpose rows and cols of copied BOARD
@@ -58,7 +58,11 @@ const TicTacToe = (function () {
     const gameStatus = function () {
         const tie = BOARD.every((i) => i.every((j) => j != ' '));
 
-        if (checkRows() || checkRows(transposeBoard()) || checkDiagonals())
+        if (
+            checkRows(getBoard()) ||
+            checkRows(transposeBoard()) ||
+            checkDiagonals()
+        )
             return 1;
         else if (tie) return 0;
         else return -1;
@@ -66,7 +70,7 @@ const TicTacToe = (function () {
 
     // function: get and set players turn
     let turn = 0;
-    const getTurn = () => temp;
+    const getTurn = () => turn;
     const flipTurn = () => (turn = turn == 1 ? 0 : 1);
 
     return {
