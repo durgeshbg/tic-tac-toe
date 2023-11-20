@@ -22,6 +22,7 @@ const TicTacToe = (function () {
     // function: make move by a specified Player in position vector
     // 1: successful move | 0: gameover | -1: not possible
     const makeMove = function (pos) {
+        if (gameStatus() != -1) return 0;
         if (BOARD[pos[0]][pos[1]] == ' ') {
             BOARD[pos[0]][pos[1]] = players[turn].marker;
             if (gameStatus() != -1) return 0;
