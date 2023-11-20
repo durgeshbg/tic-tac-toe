@@ -143,11 +143,20 @@ const DOMLogic = (function () {
     return { render };
 })();
 
+document.querySelector('form').addEventListener('submit', (e) => {
+    playerName = [e.target[0].value, e.target[2].value];
+    TicTacToe.playerCreate(playerName[0], 'X');
+    TicTacToe.playerCreate(playerName[1], 'O');
+    e.target.reset();
+    DOMLogic.render();
+});
+
 document.querySelector('.reset button').addEventListener('click', () => {
     TicTacToe.resetBoard();
     DOMLogic.render();
 });
 
-TicTacToe.playerCreate('MAN', 'X');
-TicTacToe.playerCreate('BOT', 'O');
-DOMLogic.render();
+document.addEventListener(
+    'DOMContentLoaded',
+    document.querySelector('dialog').showModal()
+);
