@@ -4,10 +4,9 @@ const TicTacToe = (function () {
         [' ', ' ', ' '],
         [' ', ' ', ' '],
     ];
-    const players = [];
-    let turn = 0;
 
     // Player object
+    const players = [];
     const Player = function (name, marker) {
         return { name, marker };
     };
@@ -66,12 +65,10 @@ const TicTacToe = (function () {
         else return -1;
     };
 
-    // function: get players turn
-    const getTurn = () => {
-        let temp = turn;
-        turn = turn == 1 ? 0 : 1;
-        return temp;
-    };
+    // function: get and set players turn
+    let turn = 0;
+    const getTurn = () => temp;
+    const flipTurn = () => (turn = turn == 1 ? 0 : 1);
 
     return {
         getBoard,
@@ -80,6 +77,7 @@ const TicTacToe = (function () {
         players,
         playerCreate,
         getTurn,
+        flipTurn,
     };
 })();
 
