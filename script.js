@@ -1,6 +1,6 @@
 const TicTacToe = (function () {
     const BOARD = [
-        [' ', ' ', ' '],
+        ['', ' ', ' '],
         [' ', ' ', ' '],
         [' ', ' ', ' '],
     ];
@@ -105,20 +105,13 @@ const TicTacToe = (function () {
 
 const DOMLogic = (function () {
     const renderBoard = function (gameboard) {
-        const board = document.querySelector('.board');
-        board.innerHTML = '';
-        for (let i = 0; i < 3; i++) {
-            const row = document.createElement('div');
+        const items = [...document.querySelectorAll('.board .item')];
+        let itemIndex = 0;
+        for (let i = 0; i < 3; i++)
             for (let j = 0; j < 3; j++) {
-                const item = document.createElement('div');
-                item.textContent = gameboard[i][j];
-                item.classList.add(`item`, `${i}-${j}`);
-                item.addEventListener('click', makeMove);
-                row.appendChild(item);
+                items[itemIndex].textContent = gameboard[i][j];
+                itemIndex++;
             }
-            row.classList.add('row');
-            board.appendChild(row);
-        }
     };
 
     const makeMove = function (e) {
