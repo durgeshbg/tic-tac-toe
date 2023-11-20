@@ -14,7 +14,7 @@ body {
     height: 100dvh;
     background-color: var(--sky-blue);
     display: grid;
-    grid-template: 2fr 0.4fr 7fr / 1fr 2fr 1fr;
+    grid-template: 2fr 0.4fr 7fr 1fr / 1fr 2fr 1fr;
 }
 
 h1 {
@@ -78,4 +78,17 @@ h1 {
     display: grid;
     place-content: center;
     font-size: 100px;
+}
+.reset {
+    grid-area: 4 / 2 / 5 / 3;
+    justify-self: center;
+    align-self: center;
+}
+.reset button {
+    font-size: 30px;
+    color: black;
+    background-color: silver;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
 }
