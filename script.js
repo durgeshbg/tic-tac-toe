@@ -152,6 +152,7 @@ document.querySelector('form').addEventListener('submit', (e) => {
 });
 
 document.querySelector('.reset button').addEventListener('click', () => {
+    document.querySelector('.message').textContent = '';
     TicTacToe.resetBoard();
     DOMLogic.render();
 });
